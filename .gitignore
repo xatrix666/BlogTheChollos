@@ -1,0 +1,11 @@
+# Ignorar node_modules en backend y frontend
+/backend/node_modules/
+/frontend-blog/node_modules/
+
+# Ignorar carpetas de build de frontend si existen
+/frontend-blog/build/
+/frontend-blog/dist/
+
+# Config files, log files
+*.log
+.env

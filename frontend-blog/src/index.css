@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+body {
+  background: linear-gradient(135deg, #e0e7ff 0%, #fbc2eb 50%, #f9f9f9 100%);
+  min-height: 100vh;
+  overflow-x: hidden !important;
+  position: relative;
+  max-width: 100vw;
+}
+
+/* Scroll invisible pero funcional en todo el viewport */
+html, body, #root {
+  height: 100%;
+  overflow-y: auto;
+  margin: 0; /* importante */
+  padding: 0; /* importante */
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  display: none !important;
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
