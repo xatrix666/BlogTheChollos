@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CommentSection from "../components/CommentSection.jsx";
 
 export default function Detail() {
   const { id } = useParams();
@@ -8,7 +9,8 @@ export default function Detail() {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/posts/${id}`)
-      .then(res => setPost(res.data));
+      .then(res => setPost(res.data))
+      .catch(console.error);
   }, [id]);
 
   if (!post) return <div className="text-center py-20">Cargando...</div>;
@@ -16,6 +18,16 @@ export default function Detail() {
   return (
     <div className="flex flex-col max-w-xl mx-auto bg-white rounded-2xl shadow p-8 gap-3 mt-6 mb-6">
       <Link to="/" className="text-blue-600 hover:underline mb-2">← Volver</Link>
+
+      {post.category_name && (
+        <span
+          className="inline-flex items-center gap-1 px-3 py-1 mb-2 rounded-full text-white text-xs font-semibold"
+          style={{ backgroundColor: post.category_color || '#3B82F6' }}
+        >
+          <span>{post.category_icon}</span> {post.category_name}
+        </span>
+      )}
+
       {post.image && (
         <img 
           src={post.image} 
@@ -23,25 +35,34 @@ export default function Detail() {
           className="w-full rounded mb-4 max-h-[40vh] object-contain" 
         />
       )}
+
       <h2 className="text-3xl font-bold mb-2 text-gray-900">{post.title}</h2>
+
       {post.price && (
         <span className="inline-block px-3 py-1 mb-2 bg-green-200 text-green-700 font-bold rounded">
           💶 {parseFloat(post.price).toLocaleString("es-ES", { style: "currency", currency: "EUR" })}
         </span>
       )}
+
       <p className="text-gray-800 mb-2">{post.content}</p>
+
       {post.link && (
         <a 
           href={post.link} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="inline-block text-blue-700 underline hover:underline mb-3">
+          className="inline-block text-blue-700 underline hover:underline mb-3"
+        >
           Ir a la oferta 🔗
         </a>
       )}
+
       <div className="text-xs text-gray-400 text-right">
         Publicado: {new Date(post.created_at).toLocaleString()}
       </div>
+
+      {/* Sección de comentarios */}
+      <CommentSection postId={id} />
     </div>
   );
 }

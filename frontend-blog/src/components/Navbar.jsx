@@ -15,6 +15,7 @@ export default function Navbar() {
       >
         <span>🏡</span> Inicio
       </NavLink>
+      
       <NavLink
         to="/añadir"
         className={({ isActive }) =>
@@ -25,6 +26,19 @@ export default function Navbar() {
         }
       >
         <span>🎁</span> Añadir
+      </NavLink>
+
+      {/* NUEVA OPCIÓN DE FILTROS */}
+      <NavLink
+        to="/filtros"
+        className={({ isActive }) =>
+          "group px-6 py-2 rounded-2xl flex items-center gap-2 text-lg font-extrabold transition-all duration-200 " +
+          (isActive
+            ? "bg-white/90 text-purple-700 shadow"
+            : "text-white hover:bg-white/20 hover:text-purple-100")
+        }
+      >
+        <span>🔍</span> Filtros
       </NavLink>
     </nav>
   );

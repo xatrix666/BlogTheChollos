@@ -8,15 +8,16 @@ body {
   max-width: 100vw;
 }
 
-/* Scroll invisible pero funcional en todo el viewport */
+/* Scroll invisible pero funcional */
 html, body, #root {
   height: 100%;
   overflow-y: auto;
-  margin: 0; /* importante */
-  padding: 0; /* importante */
+  margin: 0;
+  padding: 0;
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
 }
+
 html::-webkit-scrollbar,
 body::-webkit-scrollbar,
 #root::-webkit-scrollbar {
@@ -30,5 +31,38 @@ body::-webkit-scrollbar,
   html, body, #root {
     height: 100%;
     overflow-y: auto;
+  }
+}
+
+/* Animación mejorada para notificaciones */
+@keyframes fade-in-out {
+  0% { 
+    opacity: 0; 
+    transform: translateY(20px) scale(0.9); 
+  }
+  15% { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+  85% { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: translateY(-20px) scale(0.9); 
+  }
+}
+
+.animate-fade-in-out {
+  animation: fade-in-out 4s ease forwards;
+}
+
+@media (max-width: 640px) {
+  .notification {
+    bottom: 2rem !important;
+    right: 2rem !important;
+    left: 2rem !important;
+    width: auto !important;
   }
 }

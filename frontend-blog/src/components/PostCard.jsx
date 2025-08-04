@@ -12,9 +12,22 @@ export default function PostCard({ post }) {
         />
       )}
       <div className="flex-1">
-        <h3 className="text-2xl font-bold mb-1 text-blue-800 group-hover:text-pink-600 transition">
-          <Link to={`/chollo/${post.id}`} className="hover:underline">{post.title}</Link>
-        </h3>
+        <div className="flex items-center gap-3 mb-1">
+          {post.category_name && (
+            <span
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-white text-xs font-semibold"
+              style={{ backgroundColor: post.category_color || '#3B82F6' }}
+            >
+              <span>{post.category_icon}</span>
+              {post.category_name}
+            </span>
+          )}
+          <h3 className="text-2xl font-bold text-blue-800 group-hover:text-pink-600 transition flex-1">
+            <Link to={`/chollo/${post.id}`} className="hover:underline">
+              {post.title}
+            </Link>
+          </h3>
+        </div>
         {post.price && (
           <span className="inline-block px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm font-bold mb-1">
             {parseFloat(post.price).toLocaleString("es-ES", { style: "currency", currency: "EUR" })}
@@ -22,9 +35,12 @@ export default function PostCard({ post }) {
         )}
         <p className="text-gray-700 mt-2 line-clamp-2">{post.content}</p>
         {post.link && (
-          <a href={post.link.startsWith('http') ? post.link : `https://${post.link}`}
+          <a
+            href={post.link.startsWith('http') ? post.link : `https://${post.link}`}
             className="inline-block mt-3 text-blue-600 font-semibold hover:text-blue-900 underline transition"
-            target="_blank" rel="noopener noreferrer">
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Ver oferta 🔗
           </a>
         )}
