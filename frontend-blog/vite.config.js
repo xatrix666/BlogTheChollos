@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'  // mantén este plugin
 
 export default defineConfig({
-  base: '/',
+  base: '/BlogTheChollos/',
   plugins: [
     tailwindcss(),
     react()
