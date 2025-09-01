@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import StarRating from "./StarRating.jsx";
 
 export default function PostCard({ post }) {
   return (
@@ -28,6 +29,23 @@ export default function PostCard({ post }) {
             </Link>
           </h3>
         </div>
+        
+        {/* Rating mejorado */}
+        <div className="flex items-center gap-2 mb-2">
+          <StarRating 
+            value={post.average_rating || 0} 
+            disabled 
+            size="text-lg" 
+            showValue={false}
+          />
+          <span className="text-sm font-semibold text-gray-700">
+            {post.average_rating ? post.average_rating.toFixed(1) : '—'}
+          </span>
+          <span className="text-xs text-gray-500">
+            ({post.total_ratings || 0} {(post.total_ratings || 0) === 1 ? 'valoración' : 'valoraciones'})
+          </span>
+        </div>
+
         {post.price && (
           <span className="inline-block px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm font-bold mb-1">
             {parseFloat(post.price).toLocaleString("es-ES", { style: "currency", currency: "EUR" })}
